@@ -5,7 +5,9 @@ import org.apache.commons.lang3.RandomStringUtils;
 public class Courier {
 
     public final String login;
+
     public final String password;
+
     public final String firstName;
 
     public Courier(String login, String password, String firstName) {
@@ -15,7 +17,7 @@ public class Courier {
     }
 
     public static Courier getRandom() {
-        return Courier.getRandom(true,true,true);
+        return Courier.getRandom(true, true, true);
     }
 
     public static Courier getRandom(boolean useLogin, boolean usePassword, boolean useFirstname) {
@@ -35,5 +37,10 @@ public class Courier {
         }
 
         return new Courier(login, password, firstName);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Курьер { Имя:%s, Логин:%s, Пароль:%s }", this.firstName, this.login, this.password);
     }
 }
