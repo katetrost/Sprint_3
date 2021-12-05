@@ -53,11 +53,37 @@ public class CourierLoginTest {
     }
 
     @Test
+    @DisplayName("Проверить, что курьер не может авторизоваться с значением логина null")
+    @Description("Тест ручки /api/v1/courier/login")
+    public void checkCourierLoginLogNull(){
+        courierClient.create(courier);
+        String login = null;
+
+        ValidatableResponse validatableResponse = courierClient.login(new CourierCredentials(login, courier.password));
+
+        validatableResponse.assertThat().statusCode(400);
+        validatableResponse.assertThat().body("message", equalTo("Недостаточно данных для входа"));
+    }
+
+    @Test
     @DisplayName("Проверить, что курьер не может авторизоваться без пароля")
     @Description("Тест ручки /api/v1/courier/login")
     public void checkCourierLoginWithoutPassword(){
         courierClient.create(courier);
         String password = "";
+
+        ValidatableResponse validatableResponse = courierClient.login(new CourierCredentials(courier.login, password));
+
+        validatableResponse.assertThat().statusCode(400);
+        validatableResponse.assertThat().body("message", equalTo("Недостаточно данных для входа"));
+    }
+
+    @Test
+    @DisplayName("Проверить, что курьер не может авторизоваться с паролем null")
+    @Description("Тест ручки /api/v1/courier/login")
+    public void checkCourierLoginPasswordNull(){
+        courierClient.create(courier);
+        String password = null;
 
         ValidatableResponse validatableResponse = courierClient.login(new CourierCredentials(courier.login, password));
 
