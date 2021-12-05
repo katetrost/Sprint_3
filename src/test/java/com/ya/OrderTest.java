@@ -41,7 +41,7 @@ public class OrderTest {
 
     @Test
     @DisplayName("Проверка, что можно создаёшь заказ с разными вариантами: BLACK или GREY, оба цвета, не указывать цвет")
-    @Description("Тест ручки POST /api/v1/orders")
+    @Description("Тест  POST /api/v1/orders")
     public void checkCreateOrderWithBlack() throws JsonProcessingException {
         Response response = order.createOrder(new String[] {color});
         orderTrack = response.then().extract().body().path("track");

@@ -28,7 +28,7 @@ public class CourierTest {
 
     @Test
     @DisplayName("Проверка,что курьера можно создать.")
-    @Description("Тест ручки /api/v1/courier")
+    @Description("Тест  /api/v1/courier")
     public void checkCourierCanBeCreated(){
         // Arrange - Подготовка данных
         Courier courier = Courier.getRandom();
@@ -46,7 +46,7 @@ public class CourierTest {
 
     @Test
     @DisplayName("Проверьте, что нельзя создать двух одинаковых курьеров.")
-    @Description("Тест ручки /api/v1/courier")
+    @Description("Тест  /api/v1/courier")
     public void checkCourierCannotTwoIdenticalCreated(){
         // Arrange
         Courier courier = Courier.getRandom();
@@ -63,7 +63,7 @@ public class CourierTest {
 
     @Test
     @DisplayName("Проверка регистрации курьера без логина.")
-    @Description("Тест ручки /api/v1/courier")
+    @Description("Тест  /api/v1/courier")
     public void checkCreatCourierWithoutLogin() {
         Courier courier = Courier.getRandom(false,true, true);
 
@@ -76,7 +76,7 @@ public class CourierTest {
 
     @Test
     @DisplayName("Проверка регистрации курьера без пароля.")
-    @Description("Тест ручки /api/v1/courier")
+    @Description("Тест  /api/v1/courier")
     public void checkCreatCourierWithoutPassword() {
         Courier courier = Courier.getRandom(true,false, true);
 

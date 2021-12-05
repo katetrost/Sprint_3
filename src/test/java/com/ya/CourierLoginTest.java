@@ -28,7 +28,7 @@ public class CourierLoginTest {
 
     @Test
     @DisplayName("Проверить, что курьер может авторизоваться")
-    @Description("Тест ручки /api/v1/courier/login") // описание теста
+    @Description("Тест  /api/v1/courier/login") // описание теста
     public void checkCourierLogin(){
         courierClient.create(courier);
 
@@ -41,12 +41,11 @@ public class CourierLoginTest {
 
     @Test
     @DisplayName("Проверить, что курьер не может авторизоваться без логина")
-    @Description("Тест ручки /api/v1/courier/login")
-    public void checkCourierLoginWithoutLog(){
+    @Description("Тест  /api/v1/courier/login")
+    public void checkCourierLoginWithoutUserName(){
         courierClient.create(courier);
-        String login = "";
 
-        ValidatableResponse validatableResponse = courierClient.login(new CourierCredentials(login, courier.password));
+        ValidatableResponse validatableResponse = courierClient.login(new CourierCredentials("", courier.password));
 
         validatableResponse.assertThat().statusCode(400);
         validatableResponse.assertThat().body("message", equalTo("Недостаточно данных для входа"));
@@ -54,12 +53,11 @@ public class CourierLoginTest {
 
     @Test
     @DisplayName("Проверить, что курьер не может авторизоваться с значением логина null")
-    @Description("Тест ручки /api/v1/courier/login")
-    public void checkCourierLoginLogNull(){
+    @Description("Тест  /api/v1/courier/login")
+    public void checkCourierLoginNull(){
         courierClient.create(courier);
-        String login = null;
 
-        ValidatableResponse validatableResponse = courierClient.login(new CourierCredentials(login, courier.password));
+        ValidatableResponse validatableResponse = courierClient.login(new CourierCredentials(null, courier.password));
 
         validatableResponse.assertThat().statusCode(400);
         validatableResponse.assertThat().body("message", equalTo("Недостаточно данных для входа"));
@@ -67,12 +65,11 @@ public class CourierLoginTest {
 
     @Test
     @DisplayName("Проверить, что курьер не может авторизоваться без пароля")
-    @Description("Тест ручки /api/v1/courier/login")
+    @Description("Тест  /api/v1/courier/login")
     public void checkCourierLoginWithoutPassword(){
         courierClient.create(courier);
-        String password = "";
 
-        ValidatableResponse validatableResponse = courierClient.login(new CourierCredentials(courier.login, password));
+        ValidatableResponse validatableResponse = courierClient.login(new CourierCredentials(courier.login, ""));
 
         validatableResponse.assertThat().statusCode(400);
         validatableResponse.assertThat().body("message", equalTo("Недостаточно данных для входа"));
@@ -80,12 +77,11 @@ public class CourierLoginTest {
 
     @Test
     @DisplayName("Проверить, что курьер не может авторизоваться с паролем null")
-    @Description("Тест ручки /api/v1/courier/login")
+    @Description("Тест /api/v1/courier/login")
     public void checkCourierLoginPasswordNull(){
         courierClient.create(courier);
-        String password = null;
 
-        ValidatableResponse validatableResponse = courierClient.login(new CourierCredentials(courier.login, password));
+        ValidatableResponse validatableResponse = courierClient.login(new CourierCredentials(courier.login, null));
 
         validatableResponse.assertThat().statusCode(400);
         validatableResponse.assertThat().body("message", equalTo("Недостаточно данных для входа"));
@@ -93,7 +89,7 @@ public class CourierLoginTest {
 
     @Test
     @DisplayName("Проверить, если неправильно указать логин, вернется ошибка")
-    @Description("Тест ручки /api/v1/courier/login")
+    @Description("Тест /api/v1/courier/login")
     public void checkIncorrectLoginReturnError(){
         courierClient.create(courier);
         String login = "Никита";
@@ -106,7 +102,7 @@ public class CourierLoginTest {
 
     @Test
     @DisplayName("Проверить, если неправильно указать пароль, вернется ошибка.")
-    @Description("Тест ручки /api/v1/courier/login")
+    @Description("Тест /api/v1/courier/login")
     public void checkIncorrectPasswordReturnError(){
         courierClient.create(courier);
         String password = "12345";
@@ -119,7 +115,7 @@ public class CourierLoginTest {
 
     @Test
     @DisplayName("Проверить, если авторизоваться под несуществующим пользователем, запрос возвращает ошибку.")
-    @Description("Тест ручки /api/v1/courier/login")
+    @Description("Тест /api/v1/courier/login")
     public void checkCourierLoginNonExistent(){
         String login = "abcd";
         String password = "1234";
